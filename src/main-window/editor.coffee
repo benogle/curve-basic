@@ -1,4 +1,5 @@
 fs = require 'fs'
+ipc = require 'ipc'
 {SVGDocument} = require 'curve'
 
 module.exports =
@@ -14,6 +15,7 @@ class Editor
     svgFile = fs.readFileSync(@filePath, {encoding: 'utf8'})
     @svgDocument.deserialize(svgFile)
     document.title = @filePath
+    ipc.send('set-represented-filename', @filePath)
 
   clearDocument: ->
     @svgDocument.getObjectLayer().clear()

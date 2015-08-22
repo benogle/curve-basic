@@ -1,6 +1,8 @@
 ApplicationWindow = require './application-window'
 app = require 'app' # provided by electron
 dialog = require 'dialog' # provided by electron
+ipc = require 'ipc' # provided by electron
+BrowserWindow = require 'browser-window' # provided by electron
 
 module.exports =
 class Application
@@ -15,6 +17,10 @@ class Application
     # Quit when all windows are closed.
     app.on 'window-all-closed', -> app.quit()
     app.on 'ready', => @openWindow()
+
+    ipc.on 'set-represented-filename', (event, filePath) =>
+      sendingWindow = BrowserWindow.fromWebContents(event.sender)
+      sendingWindow.setRepresentedFilename(filePath)
 
   openWindow: ->
     htmlURL = "file://#{__dirname}/../main-window/index.html"
