@@ -1,12 +1,22 @@
-# Electron Sample.app
+# Curve Basic
 
-This is a sample app
+This is a sample electron app using [Curve](http://github.com/benogle/curve). There are several tags you can check out to see the addition of desktop integration to a a webapp. See the [Demo script](https://github.com/benogle/curve-basic/blob/master/demo.md) to walk through the tags:
+
+```
+00-loads-svg
+01-open-files
+02-represented-file
+03-document-edited
+04-prompt-before-exit
+```
+
+### Developing
 
 ```bash
 ./script/bootstrap
 ```
 
-Then you can run it. This will run the app in development mode.
+Then you can run it:
 
 ```
 ./script/run
@@ -18,6 +28,4 @@ And when you're ready to build for release run:
 ./script/build
 ```
 
-#### Magic
-
-![omghellotada](https://cloud.githubusercontent.com/assets/69169/9285656/f67f853e-429c-11e5-8f0d-bad9f6b16052.png)
+You can
