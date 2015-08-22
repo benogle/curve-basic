@@ -10,8 +10,8 @@ class Editor
     @setFilePath(filePath)
     @updateDocumentSize()
 
-    @svgDocument.on 'change', ->
-      ipc.send('set-document-edited', true)
+    @svgDocument.on 'change', =>
+      @setEdited(true)
 
   setFilePath: (@filePath) ->
     @clearDocument()
@@ -19,7 +19,13 @@ class Editor
     @svgDocument.deserialize(svgFile)
     document.title = @filePath
     ipc.send('set-represented-filename', @filePath)
-    ipc.send('set-document-edited', false)
+    @setEdited(false)
+
+  save: ->
+    console.log 'save!'
+
+  setEdited: (@edited) ->
+    ipc.send('set-document-edited', @edited)
 
   clearDocument: ->
     @svgDocument.getObjectLayer().clear()
