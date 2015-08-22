@@ -22,6 +22,10 @@ class Application
       sendingWindow = BrowserWindow.fromWebContents(event.sender)
       sendingWindow.setRepresentedFilename(filePath)
 
+    ipc.on 'set-document-edited', (event, edited) =>
+      sendingWindow = BrowserWindow.fromWebContents(event.sender)
+      sendingWindow.setDocumentEdited(edited)
+
   openWindow: ->
     htmlURL = "file://#{__dirname}/../main-window/index.html"
     @window = new ApplicationWindow htmlURL,
