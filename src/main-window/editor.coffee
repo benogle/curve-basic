@@ -13,6 +13,7 @@ class Editor
     @clearDocument()
     svgFile = fs.readFileSync(@filePath, {encoding: 'utf8'})
     @svgDocument.deserialize(svgFile)
+    document.title = @filePath
 
   clearDocument: ->
     @svgDocument.getObjectLayer().clear()
