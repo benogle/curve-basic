@@ -1,8 +1,8 @@
 fs = require 'fs'
-{SVGDocument} = require('curve')
+{SVGDocument} = require 'curve'
 
 module.exports =
-class Main
+class Editor
   constructor: (@canvasElement, filePath) ->
     @svgDocument = new SVGDocument(@canvasElement)
     @svgDocument.initializeTools()
@@ -10,8 +10,13 @@ class Main
     @updateDocumentSize()
 
   setFilePath: (@filePath) ->
+    @clearDocument()
     svgFile = fs.readFileSync(@filePath, {encoding: 'utf8'})
     @svgDocument.deserialize(svgFile)
+
+  clearDocument: ->
+    @svgDocument.getObjectLayer().clear()
+    @svgDocument.model.reset()
 
   updateDocumentSize: ->
     size = this.svgDocument.getSize()
