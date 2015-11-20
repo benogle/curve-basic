@@ -27,5 +27,3 @@ And when you're ready to build for release run:
 ```
 ./script/build
 ```
-
-You can

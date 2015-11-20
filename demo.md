@@ -106,21 +106,30 @@ save: ->
 
 * Add to index.coffee
 
+To the top, under the requires:
+
 ```coffee
-  window.onbeforeunload = ->
-    unless editor.edited
+remote = require 'remote'
+editor = null
+```
+
+To the end:
+
+```coffee
+window.onbeforeunload = ->
+  unless editor.edited
+    editor.save()
+    return true
+
+  chosen = showConfirmDialog(editor.filePath)
+  switch chosen
+    when 0
       editor.save()
       return true
-
-    chosen = showConfirmDialog(editor.filePath)
-    switch chosen
-      when 0
-        editor.save()
-        return true
-      when 1
-        return false
-      when 2
-        return true
+    when 1
+      return false
+    when 2
+      return true
 
 showConfirmDialog = (filePath) ->
   dialog = remote.require('dialog')
