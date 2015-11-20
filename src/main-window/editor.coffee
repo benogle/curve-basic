@@ -10,8 +10,14 @@ class Editor
     @setFilePath(filePath)
     @updateDocumentSize()
 
-    @svgDocument.on 'change', ->
-      ipc.send('set-document-edited', true)
+    @svgDocument.on 'change', =>
+      @setEdited(true)
+
+  save: ->
+    console.log 'save!'
+
+  setEdited: (@edited) ->
+    ipc.send('set-document-edited', @edited)
 
   setFilePath: (@filePath) ->
     @clearDocument()
